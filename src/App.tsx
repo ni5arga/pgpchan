@@ -111,7 +111,7 @@ function App() {
         </div>
 
         <div className={`rounded-2xl p-8 mb-8 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">Name</label>
@@ -124,7 +124,7 @@ function App() {
                       ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
                       : 'bg-pink-50 border-pink-200 focus:border-pink-500'
                   } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
-                  placeholder="Kawaii Name"
+                  placeholder="Your Name"
                 />
               </div>
               <div>
@@ -138,7 +138,7 @@ function App() {
                       ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
                       : 'bg-pink-50 border-pink-200 focus:border-pink-500'
                   } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
-                  placeholder="kawaii@email.com"
+                  placeholder="example@email.com"
                 />
               </div>
             </div>
