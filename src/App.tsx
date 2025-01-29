@@ -110,7 +110,7 @@ function App() {
           </div>
         </div>
 
-        <div className={`rounded-2xl p-8 mb-8 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300`}>
+        <div className={`rounded-2xl p-8 mb-8 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300 max-w-xl mx-auto`}>
           <div className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <div className="space-y-6"> {/* Increased space here */}
               <div>
