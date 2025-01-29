@@ -112,17 +112,16 @@ function App() {
 
         <div className={`rounded-2xl p-8 mb-8 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300`}>
           <div className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <div className="space-y-4">
+            <div className="space-y-6"> {/* Increased space here */}
               <div>
                 <label className="block text-sm font-medium mb-1">Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className={`w-full px-4 py-2 rounded-xl ${
-                    darkMode 
-                      ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
-                      : 'bg-pink-50 border-pink-200 focus:border-pink-500'
+                  className={`w-full px-4 py-2 rounded-xl ${darkMode 
+                    ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
+                    : 'bg-pink-50 border-pink-200 focus:border-pink-500'
                   } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
                   placeholder="Your Name"
                 />
@@ -133,26 +132,24 @@ function App() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full px-4 py-2 rounded-xl ${
-                    darkMode 
-                      ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
-                      : 'bg-pink-50 border-pink-200 focus:border-pink-500'
+                  className={`w-full px-4 py-2 rounded-xl ${darkMode 
+                    ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
+                    : 'bg-pink-50 border-pink-200 focus:border-pink-500'
                   } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
                   placeholder="example@email.com"
                 />
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-6"> {/* Increased space here */}
               <div>
                 <label className="block text-sm font-medium mb-1">Key Type</label>
                 <select
                   value={keyType}
                   onChange={(e) => setKeyType(e.target.value as 'ecc' | 'rsa')}
-                  className={`w-full px-4 py-2 rounded-xl ${
-                    darkMode 
-                      ? 'bg-gray-700 border-gray-600' 
-                      : 'bg-pink-50 border-pink-200'
+                  className={`w-full px-4 py-2 rounded-xl ${darkMode 
+                    ? 'bg-gray-700 border-gray-600' 
+                    : 'bg-pink-50 border-pink-200'
                   } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
                 >
                   <option value="ecc">ECC (Elliptic Curve)</option>
@@ -166,10 +163,9 @@ function App() {
                   <select
                     value={rsaBits}
                     onChange={(e) => setRsaBits(Number(e.target.value))}
-                    className={`w-full px-4 py-2 rounded-xl ${
-                      darkMode 
-                        ? 'bg-gray-700 border-gray-600' 
-                        : 'bg-pink-50 border-pink-200'
+                    className={`w-full px-4 py-2 rounded-xl ${darkMode 
+                      ? 'bg-gray-700 border-gray-600' 
+                      : 'bg-pink-50 border-pink-200'
                     } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
                   >
                     <option value={2048}>2048 bits</option>
@@ -183,10 +179,9 @@ function App() {
                   <select
                     value={eccCurve}
                     onChange={(e) => setEccCurve(e.target.value)}
-                    className={`w-full px-4 py-2 rounded-xl ${
-                      darkMode 
-                        ? 'bg-gray-700 border-gray-600' 
-                        : 'bg-pink-50 border-pink-200'
+                    className={`w-full px-4 py-2 rounded-xl ${darkMode 
+                      ? 'bg-gray-700 border-gray-600' 
+                      : 'bg-pink-50 border-pink-200'
                     } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
                   >
                     <option value="curve25519">Curve25519 (Modern, Fast)</option>
@@ -202,10 +197,9 @@ function App() {
           <button
             onClick={generateKeys}
             disabled={loading}
-            className={`mt-6 w-full py-3 px-4 rounded-xl flex items-center justify-center gap-2 ${
-              loading
-                ? 'bg-pink-400 cursor-not-allowed'
-                : 'bg-pink-500 hover:bg-pink-600 shadow-lg hover:shadow-xl'
+            className={`mt-6 w-full py-3 px-4 rounded-xl flex items-center justify-center gap-2 ${loading
+              ? 'bg-pink-400 cursor-not-allowed'
+              : 'bg-pink-500 hover:bg-pink-600 shadow-lg hover:shadow-xl'
             } text-white font-medium transition-all duration-300`}
           >
             <Lock className="w-5 h-5" />
@@ -221,27 +215,23 @@ function App() {
                 <div className="space-x-2">
                   <button
                     onClick={() => copyToClipboard(keys.publicKey, 'public')}
-                    className={`p-2 rounded-xl ${
-                      darkMode ? 'hover:bg-gray-700' : 'hover:bg-pink-100'
-                    } transition-colors`}
+                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
                   >
                     <Copy className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => downloadKey(keys.publicKey, 'public')}
-                    className={`p-2 rounded-xl ${
-                      darkMode ? 'hover:bg-gray-700' : 'hover:bg-pink-100'
-                    } transition-colors`}
+                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
                   >
                     <Download className="w-5 h-5" />
                   </button>
                 </div>
               </div>
-              <pre className={`p-4 rounded-xl overflow-x-auto ${
-                darkMode ? 'bg-gray-900' : 'bg-pink-50'
-              } text-sm`}>
-                {keys.publicKey}
-              </pre>
+              <textarea
+                readOnly
+                value={keys.publicKey}
+                className="w-full h-48 p-4 bg-transparent border-2 rounded-xl focus:ring-2 focus:ring-pink-500/50 outline-none resize-none"
+              />
             </div>
 
             <div className={`rounded-2xl p-6 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300`}>
@@ -250,27 +240,23 @@ function App() {
                 <div className="space-x-2">
                   <button
                     onClick={() => copyToClipboard(keys.privateKey, 'private')}
-                    className={`p-2 rounded-xl ${
-                      darkMode ? 'hover:bg-gray-700' : 'hover:bg-pink-100'
-                    } transition-colors`}
+                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
                   >
                     <Copy className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => downloadKey(keys.privateKey, 'private')}
-                    className={`p-2 rounded-xl ${
-                      darkMode ? 'hover:bg-gray-700' : 'hover:bg-pink-100'
-                    } transition-colors`}
+                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
                   >
                     <Download className="w-5 h-5" />
                   </button>
                 </div>
               </div>
-              <pre className={`p-4 rounded-xl overflow-x-auto ${
-                darkMode ? 'bg-gray-900' : 'bg-pink-50'
-              } text-sm`}>
-                {keys.privateKey}
-              </pre>
+              <textarea
+                readOnly
+                value={keys.privateKey}
+                className="w-full h-48 p-4 bg-transparent border-2 rounded-xl focus:ring-2 focus:ring-pink-500/50 outline-none resize-none"
+              />
             </div>
           </div>
         )}
