@@ -1,2 +1,2 @@
 # pgpchan
-web-based pgp key generator to help you generate keys on the go
+web-based pgp key generator to help you generate keys on the go, uses openpgp underneath.
