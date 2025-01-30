@@ -78,7 +78,7 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-200 ${darkMode ? 'bg-gray-900 text-white' : 'bg-pink-50 text-gray-900'}`}>
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none" 
+        className="fixed inset-0 bg-cover bg-center opacity-10" 
         style={{ 
           backgroundImage: `url("${backgroundImage}")`,
           backgroundBlendMode: darkMode ? 'overlay' : 'soft-light'
@@ -110,156 +110,172 @@ function App() {
           </div>
         </div>
 
-        <div className={`rounded-2xl p-8 mb-8 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300 max-w-xl mx-auto`}>
-          <div className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <div className="space-y-6"> {/* Increased space here */}
-              <div>
-                <label className="block text-sm font-medium mb-1">Name</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className={`w-full px-4 py-2 rounded-xl ${darkMode 
-                    ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
-                    : 'bg-pink-50 border-pink-200 focus:border-pink-500'
-                  } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
-                  placeholder="Your Name"
-                />
+        <div className="max-w-4xl mx-auto">
+          <div className={`rounded-2xl p-8 mb-8 backdrop-blur-md bg-opacity-50 ${darkMode ? 'bg-gray-800/30' : 'bg-white/30'} shadow-xl hover:shadow-2xl transition-all duration-300 border border-opacity-20 ${darkMode ? 'border-white' : 'border-pink-300'}`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Name</label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className={`w-full px-4 py-3 rounded-xl ${
+                      darkMode 
+                        ? 'bg-gray-700/50 border-gray-600 focus:border-pink-500' 
+                        : 'bg-white/50 border-pink-200 focus:border-pink-500'
+                    } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all backdrop-blur-sm`}
+                    placeholder="Your Name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={`w-full px-4 py-3 rounded-xl ${
+                      darkMode 
+                        ? 'bg-gray-700/50 border-gray-600 focus:border-pink-500' 
+                        : 'bg-white/50 border-pink-200 focus:border-pink-500'
+                    } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all backdrop-blur-sm`}
+                    placeholder="example@email.com"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full px-4 py-2 rounded-xl ${darkMode 
-                    ? 'bg-gray-700 border-gray-600 focus:border-pink-500' 
-                    : 'bg-pink-50 border-pink-200 focus:border-pink-500'
-                  } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
-                  placeholder="example@email.com"
-                />
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Key Type</label>
+                  <select
+                    value={keyType}
+                    onChange={(e) => setKeyType(e.target.value as 'ecc' | 'rsa')}
+                    className={`w-full px-4 py-3 rounded-xl ${
+                      darkMode 
+                        ? 'bg-gray-700/50 border-gray-600' 
+                        : 'bg-white/50 border-pink-200'
+                    } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all backdrop-blur-sm`}
+                  >
+                    <option value="ecc">ECC (Elliptic Curve)</option>
+                    <option value="rsa">RSA</option>
+                  </select>
+                </div>
+
+                {keyType === 'rsa' ? (
+                  <div>
+                    <label className="block text-sm font-medium mb-2">RSA Bits</label>
+                    <select
+                      value={rsaBits}
+                      onChange={(e) => setRsaBits(Number(e.target.value))}
+                      className={`w-full px-4 py-3 rounded-xl ${
+                        darkMode 
+                          ? 'bg-gray-700/50 border-gray-600' 
+                          : 'bg-white/50 border-pink-200'
+                      } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all backdrop-blur-sm`}
+                    >
+                      <option value={2048}>2048 bits</option>
+                      <option value={3072}>3072 bits</option>
+                      <option value={4096}>4096 bits</option>
+                    </select>
+                  </div>
+                ) : (
+                  <div>
+                    <label className="block text-sm font-medium mb-2">ECC Curve</label>
+                    <select
+                      value={eccCurve}
+                      onChange={(e) => setEccCurve(e.target.value)}
+                      className={`w-full px-4 py-3 rounded-xl ${
+                        darkMode 
+                          ? 'bg-gray-700/50 border-gray-600' 
+                          : 'bg-white/50 border-pink-200'
+                      } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all backdrop-blur-sm`}
+                    >
+                      <option value="curve25519">Curve25519 (Modern, Fast)</option>
+                      <option value="p256">NIST P-256</option>
+                      <option value="p384">NIST P-384</option>
+                      <option value="p521">NIST P-521</option>
+                    </select>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="space-y-6"> {/* Increased space here */}
-              <div>
-                <label className="block text-sm font-medium mb-1">Key Type</label>
-                <select
-                  value={keyType}
-                  onChange={(e) => setKeyType(e.target.value as 'ecc' | 'rsa')}
-                  className={`w-full px-4 py-2 rounded-xl ${darkMode 
-                    ? 'bg-gray-700 border-gray-600' 
-                    : 'bg-pink-50 border-pink-200'
-                  } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
-                >
-                  <option value="ecc">ECC (Elliptic Curve)</option>
-                  <option value="rsa">RSA</option>
-                </select>
-              </div>
-
-              {keyType === 'rsa' ? (
-                <div>
-                  <label className="block text-sm font-medium mb-1">RSA Bits</label>
-                  <select
-                    value={rsaBits}
-                    onChange={(e) => setRsaBits(Number(e.target.value))}
-                    className={`w-full px-4 py-2 rounded-xl ${darkMode 
-                      ? 'bg-gray-700 border-gray-600' 
-                      : 'bg-pink-50 border-pink-200'
-                    } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
-                  >
-                    <option value={2048}>2048 bits</option>
-                    <option value={3072}>3072 bits</option>
-                    <option value={4096}>4096 bits</option>
-                  </select>
-                </div>
-              ) : (
-                <div>
-                  <label className="block text-sm font-medium mb-1">ECC Curve</label>
-                  <select
-                    value={eccCurve}
-                    onChange={(e) => setEccCurve(e.target.value)}
-                    className={`w-full px-4 py-2 rounded-xl ${darkMode 
-                      ? 'bg-gray-700 border-gray-600' 
-                      : 'bg-pink-50 border-pink-200'
-                    } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none transition-all`}
-                  >
-                    <option value="curve25519">Curve25519 (Modern, Fast)</option>
-                    <option value="p256">NIST P-256</option>
-                    <option value="p384">NIST P-384</option>
-                    <option value="p521">NIST P-521</option>
-                  </select>
-                </div>
-              )}
-            </div>
+            <button
+              onClick={generateKeys}
+              disabled={loading}
+              className={`mt-8 w-full py-4 px-6 rounded-xl flex items-center justify-center gap-2 ${
+                loading
+                  ? 'bg-pink-400 cursor-not-allowed'
+                  : 'bg-pink-500 hover:bg-pink-600 shadow-lg hover:shadow-xl'
+              } text-white font-medium transition-all duration-300`}
+            >
+              <Lock className="w-5 h-5" />
+              {loading ? 'Generating Keys... (◕‿◕✿)' : 'Generate Keys'}
+            </button>
           </div>
 
-          <button
-            onClick={generateKeys}
-            disabled={loading}
-            className={`mt-6 w-full py-3 px-4 rounded-xl flex items-center justify-center gap-2 ${loading
-              ? 'bg-pink-400 cursor-not-allowed'
-              : 'bg-pink-500 hover:bg-pink-600 shadow-lg hover:shadow-xl'
-            } text-white font-medium transition-all duration-300`}
-          >
-            <Lock className="w-5 h-5" />
-            {loading ? 'Generating Keys... (◕‿◕✿)' : 'Generate Keys'}
-          </button>
+          {keys && (
+            <div className="space-y-8">
+              <div className={`rounded-2xl p-8 backdrop-blur-md bg-opacity-50 ${darkMode ? 'bg-gray-800/30' : 'bg-white/30'} shadow-xl hover:shadow-2xl transition-all duration-300 border border-opacity-20 ${darkMode ? 'border-white' : 'border-pink-300'}`}>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-semibold">Public Key</h3>
+                  <div className="space-x-3">
+                    <button
+                      onClick={() => copyToClipboard(keys.publicKey, 'public')}
+                      className={`px-4 py-2 rounded-xl ${darkMode ? 'bg-gray-700/50' : 'bg-white/50'} hover:bg-pink-500 hover:text-white transition-all duration-300`}
+                    >
+                      <Copy className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={() => downloadKey(keys.publicKey, 'public')}
+                      className={`px-4 py-2 rounded-xl ${darkMode ? 'bg-gray-700/50' : 'bg-white/50'} hover:bg-pink-500 hover:text-white transition-all duration-300`}
+                    >
+                      <Download className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+                <textarea
+                  readOnly
+                  value={keys.publicKey}
+                  className={`w-full h-48 p-4 rounded-xl ${
+                    darkMode 
+                      ? 'bg-gray-700/30 border-gray-600' 
+                      : 'bg-white/30 border-pink-200'
+                  } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none resize-none backdrop-blur-sm`}
+                />
+              </div>
+
+              <div className={`rounded-2xl p-8 backdrop-blur-md bg-opacity-50 ${darkMode ? 'bg-gray-800/30' : 'bg-white/30'} shadow-xl hover:shadow-2xl transition-all duration-300 border border-opacity-20 ${darkMode ? 'border-white' : 'border-pink-300'}`}>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-semibold">Private Key</h3>
+                  <div className="space-x-3">
+                    <button
+                      onClick={() => copyToClipboard(keys.privateKey, 'private')}
+                      className={`px-4 py-2 rounded-xl ${darkMode ? 'bg-gray-700/50' : 'bg-white/50'} hover:bg-pink-500 hover:text-white transition-all duration-300`}
+                    >
+                      <Copy className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={() => downloadKey(keys.privateKey, 'private')}
+                      className={`px-4 py-2 rounded-xl ${darkMode ? 'bg-gray-700/50' : 'bg-white/50'} hover:bg-pink-500 hover:text-white transition-all duration-300`}
+                    >
+                      <Download className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+                <textarea
+                  readOnly
+                  value={keys.privateKey}
+                  className={`w-full h-48 p-4 rounded-xl ${
+                    darkMode 
+                      ? 'bg-gray-700/30 border-gray-600' 
+                      : 'bg-white/30 border-pink-200'
+                  } border-2 focus:ring-2 focus:ring-pink-500/50 outline-none resize-none backdrop-blur-sm`}
+                />
+              </div>
+            </div>
+          )}
         </div>
-
-        {keys && (
-          <div className="space-y-6">
-            <div className={`rounded-2xl p-6 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300`}>
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold">Public Key</h3>
-                <div className="space-x-2">
-                  <button
-                    onClick={() => copyToClipboard(keys.publicKey, 'public')}
-                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
-                  >
-                    <Copy className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => downloadKey(keys.publicKey, 'public')}
-                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
-                  >
-                    <Download className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-              <textarea
-                readOnly
-                value={keys.publicKey}
-                className="w-full h-48 p-4 bg-transparent border-2 rounded-xl focus:ring-2 focus:ring-pink-500/50 outline-none resize-none"
-              />
-            </div>
-
-            <div className={`rounded-2xl p-6 backdrop-blur-sm ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} shadow-xl hover:shadow-2xl transition-all duration-300`}>
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold">Private Key</h3>
-                <div className="space-x-2">
-                  <button
-                    onClick={() => copyToClipboard(keys.privateKey, 'private')}
-                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
-                  >
-                    <Copy className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => downloadKey(keys.privateKey, 'private')}
-                    className={`px-4 py-2 rounded-full text-sm ${darkMode ? 'bg-gray-700' : 'bg-pink-200'} hover:bg-pink-300`}
-                  >
-                    <Download className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-              <textarea
-                readOnly
-                value={keys.privateKey}
-                className="w-full h-48 p-4 bg-transparent border-2 rounded-xl focus:ring-2 focus:ring-pink-500/50 outline-none resize-none"
-              />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
